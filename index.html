@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Suman Wagle — WordPress Support & Developer</title>
+<!-- Disable Cloudflare email obfuscation to prevent render-blocking script injection -->
 <meta name="description" content="Suman Wagle is a WordPress support specialist and developer based in Biratnagar, Nepal with 4+ years of experience resolving complex WordPress issues and building custom solutions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -461,7 +462,7 @@
     <p class="hero-desc">WordPress support specialist and developer — resolving complex issues, optimizing performance, and delivering reliable solutions for clients worldwide.</p>
 
     <div class="hero-cta">
-      <a href="mailto:sumanwagle70@gmail.com" class="btn-primary">Get in Touch →</a>
+      <a href="#contact" class="btn-primary" data-email="sumanwagle70" data-domain="gmail.com">Get in Touch →</a>
       <a href="https://linkedin.com/in/sumanwagle" target="_blank" class="btn-outline">LinkedIn</a>
     </div>
   </div>
@@ -547,7 +548,7 @@
   <div class="contact-rows">
     <div class="contact-row">
       <div class="c-lbl">Email</div>
-      <a href="mailto:sumanwagle70@gmail.com" class="c-val">sumanwagle70@gmail.com</a>
+      <a href="#" class="c-val js-email" data-email="sumanwagle70" data-domain="gmail.com" aria-label="Send email to Suman Wagle">sumanwagle70 [at] gmail.com</a>
     </div>
     <div class="contact-row">
       <div class="c-lbl">Phone</div>
@@ -586,6 +587,18 @@
     el.style.transform = 'translateY(14px)';
     el.style.transition = 'opacity 0.4s ease ' + (i * 0.1) + 's, transform 0.4s ease ' + (i * 0.1) + 's';
     io.observe(el);
+  });
+</script>
+
+<script>
+  // Reconstruct email links to avoid Cloudflare email obfuscation script injection
+  document.querySelectorAll('[data-email]').forEach(function(el) {
+    var addr = el.dataset.email + '@' + el.dataset.domain;
+    el.href = 'mailto:' + addr;
+    if (el.classList.contains('js-email')) {
+      el.textContent = addr;
+      el.removeAttribute('aria-label');
+    }
   });
 </script>
 </body>
